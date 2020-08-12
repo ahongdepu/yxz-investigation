@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    
+  <!-- <script>
+    (function () {
+      var viewport = document.querySelector("meta[name=viewport]");
+      if (window.devicePixelRatio) {
+        var n = 1 / window.devicePixelRatio;
+        viewport.setAttribute('content', 'width=device-width, initial-scale=' + n + ', maximum-scale=' + n + ', minimum-scale=' + n + ', user-scalable=no')
+      }
+
+      var html = document.querySelector('html'), a = 7.5, b = 320 / a;
+      html.style.fontSize = Math.max(html.offsetWidth / a, b) + "px";
+      window.onresize = function () {
+        html.style.fontSize = Math.max(html.offsetWidth / a, b) + "px";
+      };
+
+      var ua = window.navigator.userAgent.toLowerCase();
+      var isIPhone = /iphone/.test(ua);
+      var isWX = /micromessenger/.test(ua);
+
+      var isFullScreen = parseInt(sessionStorage._FULLSCREEN_, 10) || /fullscreen/.test(window.location.search);
+      sessionStorage._FULLSCREEN_ = isFullScreen ? 1 : 0;
+
+      var classNameArr = [];
+
+      if (isIPhone) {
+        classNameArr.push('iosApp');
+        isFullScreen && classNameArr.push('iosTop');
+      } else {
+        classNameArr.push('androidApp');
+        isFullScreen && classNameArr.push('androidTop');
+      }
+
+      if (isWX) {
+        classNameArr.push('wxApp');
+      } else {
+        classNameArr.push('normalApp');
+      }
+
+      html.className = classNameArr.join(' ');
+
+      if (window.hostSdk && window.hostSdk.openNativePage && window.hostSdk.init) {
+        window.hostSdk.init(function () {
+          try {
+            window.hostSdk.openNativePage({name: 'closeDialog'});
+          } catch (e) {
+            console.warn(e)
+          }
+        })
+      }
+
+    })();
+    if (!window.Set || !window.Map) {
+      document.write(unescape("%3Cscript src='https://as.alipayobjects.com/g/component/??console-polyfill/0.2.2/index.js,es5-shim/4.5.7/es5-shim.min.js,es5-shim/4.5.7/es5-sham.min.js,es6-shim/0.35.1/es6-sham.min.js,es6-shim/0.35.1/es6-shim.min.js,html5shiv/3.7.2/html5shiv.min.js,media-match/2.0.2/media.match.min.js' type='text/javascript'%3E%3C/script%3E"));
+    }
+  </script> -->
+
+  <script>(function(){window.STATICPATH = '<%= BASE_URL %>'})() </script>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

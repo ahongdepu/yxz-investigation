@@ -1,0 +1,289 @@
+input,
+textarea,
+select {
+  outline: none;
+  resize: none;
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
+}
+
+ul,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
+
+a,
+button,
+li[item] {
+  cursor: pointer;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#root, #container{
+  width: 100%;
+  height: 100%;
+}
+
+.iosTop #root {
+  padding-top: .4rem;
+  padding-top: env(safe-area-inset-top);
+}
+
+.androidTop #root {
+  padding-top: 0;
+}
+
+
+//通用容器样式
+.lui-header-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: #fff;
+
+  &:before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px #e5e5e5 solid;
+  }
+}
+
+.zscroller-scrollview-content {
+  width: 100%;
+}
+
+.scroll-view {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.scroll-content{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  &.has-header{
+    padding-top: 0.88rem;
+  }
+  &.has-footer {
+    padding-bottom: 0.98rem;
+  }
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0.98rem;
+  background-color: #fff;
+  &:before{
+    content: '';
+    border-top: 1px #e5e5e5 solid;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .lui-button{
+    line-height: 0.98rem;
+    height: 0.98rem;
+  }
+}
+
+.scroll-page{
+  width: 100%;
+  height: 100%;
+}
+
+.has-scroll{
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+input::placeholder,
+input::-webkit-input-placeholder,
+textarea::placeholder,
+textarea::-webkit-input-placeholder{
+  color: #BFBFBF;
+}
+
+
+.lui-toast-main-container .lui-toast-content.lui-toast-text{
+  margin-top: -30%;
+}
+
+.lui-action-sheet-wrapper .lui-action-sheet-container .lui-a-s-cancel{
+  color: #333;
+}
+
+a, a:hover, a:visited{
+  color: @link-color;
+}
+
+.line{
+  width: 100%;
+  &.p30{
+    width: 6.9rem;
+    margin: auto;
+  }
+}
+
+.placeholder{
+  width: 100%;
+  background-color: #E5E5E5;
+  height: 0.2rem;
+}
+
+.button-primary {
+  background-color: @primary-color; //颜色1
+  color: #fff; //颜色2
+  &:before{
+    border-color: @primary-color; //颜色1
+  }
+  &.lui-button-clear {
+    background-color: transparent;
+    color: @primary-color; //颜色1
+    &:hover {
+      color: @primary-color; //颜色1
+    }
+  }
+  &:hover {
+    color: #fff; //颜色2
+  }
+}
+
+.button-gary {
+  background-color: #fff; //颜色1
+  color: #333; //颜色2
+  &:before{
+    border-color: #999; //颜色1
+  }
+  &.lui-button-clear {
+    background-color: transparent;
+    color: #333; //颜色1
+    &:hover {
+      color: #333; //颜色1
+    }
+  }
+  &:hover {
+    color: #333; //颜色2
+  }
+}
+
+.button-white {
+  background-color: #fff; //颜色1
+  color: #999; //颜色2
+  &:before{
+    border-color: #fff; //颜色1
+  }
+  &.lui-button-clear {
+    background-color: transparent;
+    color: #999; //颜色1
+    &:hover {
+      color: #999; //颜色1
+    }
+  }
+  &:hover {
+    color: #999; //颜色2
+  }
+}
+
+.button-red2{
+  background-color: #FD4E4E; //颜色1
+  color: #fff; //颜色2
+  &:before{
+    border-color: #FD4E4E; //颜色1
+  }
+  &.lui-button-clear {
+    background-color: transparent;
+    color: #FD4E4E; //颜色1
+    &:hover {
+      color: #FD4E4E; //颜色1
+    }
+  }
+  &:hover {
+    color: #fff; //颜色2
+  }
+}
+
+.button-black {
+  background-color: #333; //颜色1
+  color: #fff; //颜色2
+  &:before{
+    border-color: #333; //颜色1
+  }
+  &.lui-button-clear {
+    background-color: transparent;
+    color: #333; //颜色1
+    &:hover {
+      color: #333; //颜色1
+    }
+  }
+  &:hover {
+    color: #fff; //颜色2
+  }
+}
+
+.button-tag {
+  background-color: #F5F5F5; //颜色1
+  color: #333; //颜色2
+  &:before{
+    border-color: #F5F5F5; //颜色1
+  }
+  &.lui-button-clear {
+    background-color: transparent;
+    color: #333; //颜色1
+    &:hover {
+      color: #333; //颜色1
+    }
+    &:before{
+      border-color: #e5e5e5; //颜色1
+    }
+  }
+  &:hover {
+    color: #333; //颜色2
+  }
+}
+
+body{
+  overflow: hidden;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
