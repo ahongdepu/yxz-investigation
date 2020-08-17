@@ -3,7 +3,7 @@ import { Message as message, Notification as notification } from 'element-ui';
 import route from '@/router';
 import store from '@/store';
 
-const baseUrl = 'http://118.25.4.128:8095';
+export const baseUrl = 'http://118.25.4.128:8095';
 const defaultMsg = '访问服务器失败！';
 
 export const instance = axios.create({

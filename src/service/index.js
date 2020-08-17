@@ -30,3 +30,10 @@ export const fileDetail = (id) => ajax(`/data/entry/get/${id}`);
 export const entrySubmit = (data) => ajax(`/data/entry/get/submit`, data, 'post');
 
 
+// 获取数据
+export const examineList = ({projectId, ...data}) => ajax(`/data/entry/admin/get/${projectId}`, data, 'get');
+
+// 批量审核
+export const batch = (data) => ajax('/data/entry/examine/batch', data, 'post');
+
+

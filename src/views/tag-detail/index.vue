@@ -6,15 +6,17 @@
     <el-input
       type="textarea"
       v-model="answer"
+      :disabled="!!label"
       :autosize="{ minRows: 2, maxRows: 4 }"
       placeholder="请输入答案"
     ></el-input>
-    <el-input
-      type="textarea"
-      v-model="label"
-      :autosize="{ minRows: 2, maxRows: 4 }"
-      placeholder="请输入标签"
-    ></el-input>
+    <el-radio-group v-model="label">
+      <el-radio-button label="">空白</el-radio-button>
+      <el-radio-button label="不明语义"></el-radio-button>
+      <el-radio-button label="不文明"></el-radio-button>
+      <el-radio-button label="机器人属性"></el-radio-button>
+      <el-radio-button label="baike"></el-radio-button>
+    </el-radio-group>
     <div class="submit">
       <el-button
         :loading="loading"
@@ -53,7 +55,11 @@ export default {
         detail: { id },
       } = this;
       this.loading = true;
-      entrySubmit({ fileId, answer, label, id }).then(() => {
+      const params = { fileId, answer, label, id };
+      if (label) {
+        params.answer = '';
+      }
+      entrySubmit(params).then(() => {
         this.getDetail();
       }).finally(() => {
         this.loading = false;

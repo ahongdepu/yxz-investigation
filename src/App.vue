@@ -22,6 +22,9 @@ export default {
       this.$message.warning('请先登录');
       this.$router.push('/login');
     }
+    if (pathname === '/') {
+      this.$router.push('/tag-list');
+    }
   }
 }
 </script>

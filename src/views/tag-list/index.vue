@@ -43,6 +43,8 @@
 <script>
 import {fileList} from '@/service';
 export default {
+  name: 'TagList',
+
   data() {
     return {
       list: [],
@@ -75,9 +77,9 @@ export default {
       this.search({page: 1, pageSize})
     },
 
-    handleCurrentChange(...e) {
-      console.log(e)
-    }
+    handleCurrentChange(page) {
+      this.search({page})
+    },
   }
 }
 </script>

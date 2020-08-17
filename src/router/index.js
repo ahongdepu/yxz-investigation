@@ -20,7 +20,13 @@ export const menu = [
     name: 'TagDetail',
     father: '/tag-list', // 自定义字段  表明父级
     component: () => import(/* webpackChunkName: "TagDetail" */ '../views/tag-detail'),
-  }
+  },
+  {
+    path: '/tag-examine/:projectId',
+    name: 'TagExamine',
+    father: '/tag-manage', // 自定义字段  表明父级
+    component: () => import(/* webpackChunkName: "TagExamine" */ '../views/tag-examine'),
+  },
 ];
 
 const routes = [
