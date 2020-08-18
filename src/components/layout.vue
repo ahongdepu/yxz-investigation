@@ -1,7 +1,7 @@
 <template>
   <div class="layout flex-column flex-between">
     <div class="shrink-0 head flex-between center-items">
-      <span>学亦思Ai</span>
+      <span @click="fn">学亦思Ai</span>
       <span>hello, {{user.username}} </span>
       <el-button type="text" class="" @click="logout">退出</el-button>
     </div>
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 import {logout} from '@/service';
 
 import {menu} from '@/router';
@@ -68,14 +68,20 @@ export default {
   },
 
   computed: {
-    ...mapState({
-      // isAdmin: state => state.user.roles && state.user.roles.indexOf('admin') !== -1, // 管理员
-      // isOperator: state => state.user.roles && state.user.roles.indexOf('operator') !== -1, // 批注员
-      isAdmin: state => !!state, // 管理员
-      isOperator: state => !!state, // 批注员
-      // user: state => state.user,
-    }),
-    ...mapGetters(['user'])
+    ...mapGetters(['user']),
+
+    // 管理员
+    isAdmin() { 
+      const {user} = this;
+      return user.roles && user.roles.indexOf('admin') !== -1;
+    },
+
+    // 批注员
+    isOperator() { 
+      const {user} = this;
+      return user.roles && user.roles.indexOf('operator') !== -1;
+    },
+
   },
 
   methods: {
@@ -89,6 +95,10 @@ export default {
     select(index) {
       console.log(index);
       this.active = index
+    },
+
+    fn() {
+      console.log(this.hh, this.user)
     }
   }
 }

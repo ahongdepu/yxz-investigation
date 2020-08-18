@@ -8,7 +8,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
-    user: {},
+    user: null,
     token: '',
   },
   mutations: {
@@ -66,6 +66,7 @@ const store = new Vuex.Store({
       if (cache) {
         // store.set({token: cache});
         const user = JSON.parse(tools.decode(cache));
+        console.log('user', user)
         store.commit('set', user);
         return user;
       }

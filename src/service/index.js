@@ -26,8 +26,8 @@ export const fileList = (data) => ajax('/data/entry/datafile/list', data);
 // 获取数据
 export const fileDetail = (id) => ajax(`/data/entry/get/${id}`);
 
-// 获取数据
-export const entrySubmit = (data) => ajax(`/data/entry/get/submit`, data, 'post');
+// 数据标注提交
+export const entrySubmit = (data) => ajax(`/data/entry/submit`, data, 'post');
 
 
 // 获取数据
