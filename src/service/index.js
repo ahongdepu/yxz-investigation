@@ -23,7 +23,7 @@ export const login = (data) => {
 // 获取数据文件列表
 export const fileList = (data) => ajax('/data/entry/datafile/list', data);
 
-// 获取数据
+// 获取文件待审核记录
 export const fileDetail = (id) => ajax(`/data/entry/get/${id}`);
 
 // 数据标注提交
