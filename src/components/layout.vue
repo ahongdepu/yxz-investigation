@@ -33,8 +33,10 @@
       </el-menu>
 
       <div class="grow-1 layout-outer">
-        <div class="layout-content">
-          <router-view></router-view>
+        <div class="layout-inner">
+          <div class="layout-content">
+            <router-view></router-view>
+          </div>
         </div>
       </div>
 
@@ -118,12 +120,24 @@ export default {
   .layout-outer {
     padding: 10px;
     background-color: #e6e6e6;
-    .layout-content {
+    .layout-inner {
+      position: relative;
       background-color: white;
       width: 100%;
       height: 100%;
-      padding: 10px;
+      position: relative;
       border-radius: 6px;
+      overflow: hidden;
+    }
+    .layout-content {
+      position: absolute;
+      // padding: 10px;
+      top: 10px;
+      right: 10px;
+      bottom: 10px;
+      left: 10px;
+      height: 100%;
+      overflow-y: auto;
     }
   }
 }

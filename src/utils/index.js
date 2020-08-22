@@ -1,4 +1,38 @@
 const tools = {
+  downLoad: (data, name = "导出文件.xls") => {
+    if (!data) {return;}
+    
+    // var blob = new Blob([data], { type: 'application/vnd.ms-excel'});
+    // // window.navigator.msSaveBlob(blob, '1.xls');
+
+    // var elink = document.createElement('a');
+    // elink.download = name;
+    // elink.style.display = 'none';
+    // // var blob = new Blob([data], {type: 'application/vnd.ms-excel'});
+
+    // elink.href = URL.createObjectURL(blob);
+    // document.body.appendChild(elink);
+    // elink.click();
+    // document.body.removeChild(elink);
+    // return blob;
+
+
+    const reader = new FileReader();
+    reader.readAsDataURL(data);
+    reader.onload = (e) => {
+      console.log(e);
+      const a = document.createElement('a');
+      a.download = name;
+      // 后端设置的文件名称在res.headers的 "content-disposition": "form-data; name=\"attachment\"; filename=\"20181211191944.zip\"",
+      a.href = e.target.result;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    };
+
+
+
+  }
 };
 
 tools._keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
@@ -67,7 +101,6 @@ tools.decode = function (input) {
   output = this._utf8_decode(output);
   return output;
 };
-
 
 //UTF-8编码
 tools._utf8_encode = function (string) {

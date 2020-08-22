@@ -36,4 +36,6 @@ export const examineList = ({projectId, ...data}) => ajax(`/data/entry/admin/get
 // 批量审核
 export const batch = (data) => ajax('/data/entry/examine/batch', data, 'post');
 
+// 导出标注结果
+export const exportFile = (fileId) => ajax.downLoad(`/data/entry/export/${fileId}`);
 

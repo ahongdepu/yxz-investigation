@@ -1,56 +1,60 @@
 <template>
-  <div class="tag-examine">
-    <div class="options-bg">
+  <div class="tag-examine flex-column">
+    <div class="options-bg shrink-0">
       <el-button type="primary" :loading="loading" @click="openModal" :disabled="!idList.length">批量审核</el-button>
+      <el-button type="primary" :loading="exportLoad" @click="exportFile">导出结果</el-button>
     </div>
-    <el-table
-      :data="list"
-      ref="table"
-      border
-      row-key="id"
-      @selection-change="handleSelectionChange">
-    >
-      <el-table-column
-        type="selection"
-        width="55">
-      </el-table-column>
-      <el-table-column
-        prop="id"
-        label="ID"
-        align="center"
+    <div class="table-bg grow-1">
+      <el-table
+        :data="list"
+        ref="table"
+        border
+        row-key="id"
+        @selection-change="handleSelectionChange">
+        class="123"
       >
-      </el-table-column>
-      <el-table-column
-        prop="content"
-        label="问题"
-        align="center"
-        min-width="150"
-      >
-      </el-table-column>
-      <el-table-column
-        prop="answer"
-        label="答案"
-        align="center"
-        min-width="150"
-      >
-      </el-table-column>
-      <el-table-column
-        prop="label"
-        label="标签"
-        align="center"
-        width="160"
-      >
-      </el-table-column>
-    </el-table>
-    <div class="flex-end pagination-bg">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :total="total" v-if="total"
-        :page-sizes="[10, 20, 30, 50]"
-        :page-size="condition.pageSize"
-        layout="prev, pager, next, sizes"
-      ></el-pagination>
+        <el-table-column
+          type="selection"
+          width="55">
+        </el-table-column>
+        <el-table-column
+          prop="id"
+          label="ID"
+          align="center"
+        >
+        </el-table-column>
+        <el-table-column
+          prop="content"
+          label="问题"
+          align="center"
+          min-width="150"
+        >
+        </el-table-column>
+        <el-table-column
+          prop="answer"
+          label="答案"
+          align="center"
+          min-width="150"
+        >
+        </el-table-column>
+        <el-table-column
+          prop="label"
+          label="标签"
+          align="center"
+          width="160"
+        >
+        </el-table-column>
+      </el-table>
+      <div class="flex-end pagination-bg">
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :total="total" v-if="total"
+          :page-sizes="[10, 20, 30, 50]"
+          :page-size="condition.pageSize"
+          layout="prev, pager, next, sizes"
+        ></el-pagination>
+      </div>
     </div>
     <el-dialog
       title="批量审核"
@@ -68,7 +72,7 @@
 </template>
 
 <script>
-import {examineList, batch} from '@/service';
+import {examineList, batch, exportFile} from '@/service';
 export default {
   name: 'TagExamine',
 
@@ -89,6 +93,7 @@ export default {
       idList: [], // 选中项
 
       loading: false,
+      exportLoad: false, // 导出loading
 
       dialogVisible: false,
     }
@@ -150,18 +155,37 @@ export default {
       this.dialogVisible = true;
     },
 
+    // 导出结果
+    exportFile() {
+      const { projectId: fileId } = this.$route.params;
+      if (!fileId) {return;}
+      this.exportLoad = true;
+      exportFile(fileId).then((res) => {
+        console.log(0, res);
+        this.$message.success('导出成功！')
+      }).finally(() => {
+        this.exportLoad = false;
+      })
+    },
+
   }
 }
 </script>
 
 <style lang="less" scope>
   .tag-examine {
+    height: 100%;
     .pagination-bg {
       padding-top: 10px;
     }
 
     .options-bg {
       padding-bottom: 10px;
+    }
+
+    .table-bg {
+      overflow-y: auto;
+      padding-bottom: 40px;
     }
   }
 </style>

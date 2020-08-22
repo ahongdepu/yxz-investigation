@@ -2,6 +2,7 @@ import axios from 'axios';
 import { Message as message, Notification as notification } from 'element-ui';
 import route from '@/router';
 import store from '@/store';
+import tools from '@/utils';
 
 export const baseUrl = 'http://118.25.4.128:8095';
 const defaultMsg = '访问服务器失败！';
@@ -18,22 +19,15 @@ instance.interceptors.response.use(
       if (response.data.state === 200) {
         return Promise.resolve(response.data);
       } else {
-        // message({
-        //   message: response.data.msg || defaultMsg,
-        //   type: 'error',
-        // });
-        const err = new Error(response.data.msg || defaultMsg);
-        err.code = -8999;
+        console.log('h', response)
+        // const err = new Error(response.data.msg || defaultMsg);
+        // err.code = -8999;
         // throw err;
 
-        return Promise.reject(err);
+        return Promise.reject(response);
       }
     } else {
-        // 服务器级别错误
-        // message({
-        //   message: response.data.msg || defaultMsg,
-        //   type: 'error',
-        // });
+        console.log('非200', response)
         const err = new Error(response.data.msg || defaultMsg);
         err.code = -8999;
         // throw err;
@@ -45,21 +39,6 @@ instance.interceptors.response.use(
   function(error) {
     // 对响应错误做点什么
     console.log('error', error, Object.values(error), Object.keys(error));
-
-    // let msg = '访问服务器失败';
-    // if (error) {
-    //   if (error.data && error.data.msg) {
-    //     msg = error.data.msg;
-    //   } else {
-    //     msg = error.message || error;
-    //   }
-    // }
-
-    // // message.error(msg);
-    // message({
-    //   message: msg,
-    //   type: 'error',
-    // });
 
     const res = error && error.response;
     if (res) {
@@ -83,7 +62,8 @@ instance.interceptors.response.use(
 
 const ajax = (url, data = {}, method = 'get', options = {}) => {
   method = method.toLocaleLowerCase();
-  const {auth = true, ...other} = options;
+  // 默认开启auth认证和弹框报错
+  const {auth = true, _message = true, ...other} = options;
   const config = {url, method, ...other};
   if (method === 'get') {
     config.params = data;
@@ -98,14 +78,34 @@ const ajax = (url, data = {}, method = 'get', options = {}) => {
     }
   }
   return instance(config).catch((err) => {
-    // console.log('err', Object.values(err));
+    console.log('err', Object.values(err));
     console.log('出错了', err);
-    message({
-      message: err,
-      type: 'error',
-    });
-    throw err;
+    if (_message) {
+      message({
+        message: err,
+        type: 'error',
+      });
+      // throw err;
+    }
+    return Promise.reject(err);
   });
 };
+
+ajax.downLoad = (...param) => {
+  param[3] = {
+    ...param[3],
+    _message: false,
+    responseType: 'blob',
+  };
+  return ajax(...param).catch((response) => {
+    if (response && response.data && !response.data.state && response.data.state !== 0) {
+      const {data} = response;
+      const blob = tools.downLoad(data, '标注结果.xls');
+      return Promise.resolve(blob);
+    } else {
+      return Promise.reject(response);
+    }
+  })
+}
 
 export default ajax;

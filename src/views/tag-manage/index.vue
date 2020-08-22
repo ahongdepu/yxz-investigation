@@ -38,6 +38,7 @@
       >
         <template slot-scope="scope">
           <a :href="`/tag-examine/${scope.row.id}`" type="text" size="small">审核</a>
+          <a href="javascript: void(0);" class="export" @click="exportFile(scope.row.id)" type="text" size="small">导出</a>
         </template>
       </el-table-column>
     </el-table>
@@ -55,7 +56,7 @@
 </template>
 
 <script>
-import {fileList} from '@/service';
+import {fileList, exportFile} from '@/service';
 import {baseUrl} from '@/utils/ajax';
 import { mapGetters } from 'vuex';
 export default {
@@ -128,7 +129,19 @@ export default {
       this.$message.error('文件上传失败');
       this.loading = false;
       // this.$message.error(err)
-    }
+    },
+
+    // 导出结果
+    exportFile(fileId) {
+      if (!fileId) {return;}
+      this.exportLoad = true;
+      exportFile(fileId).then((res) => {
+        console.log(0, res);
+        this.$message.success('导出成功！')
+      }).finally(() => {
+        this.exportLoad = false;
+      })
+    },
   }
 }
 </script>
@@ -142,6 +155,10 @@ export default {
       .el-upload-list.el-upload-list--text {
         display: none;
       }
+    }
+
+    a.export {
+      margin-left: 1em;
     }
 
     .pagination-bg {
