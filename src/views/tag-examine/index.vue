@@ -15,6 +15,7 @@
       >
         <el-table-column
           type="selection"
+          align="center"
           width="55">
         </el-table-column>
         <el-table-column

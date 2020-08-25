@@ -100,8 +100,12 @@ ajax.downLoad = (...param) => {
   return ajax(...param).catch((response) => {
     if (response && response.data && !response.data.state && response.data.state !== 0) {
       const {data} = response;
-      const blob = tools.downLoad(data, '标注结果.xls');
-      return Promise.resolve(blob);
+      try {
+        const blob = tools.downLoad(data, '标注结果.xls');
+        return Promise.resolve(blob);
+      } catch(e) {
+        return Promise.reject(e);
+      }
     } else {
       return Promise.reject(response);
     }

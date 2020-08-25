@@ -1,6 +1,6 @@
 <template>
   <div class="tag-examine">
-    <div class="options-bg">
+    <div class="options-bg flex-between">
       <el-upload
         :multiple="false"
         name="file"
@@ -12,12 +12,21 @@
       >
         <el-button :loading="loading" size="small" type="primary">文件上传</el-button>
       </el-upload>
+      <el-button :loading="loading" size="small" @click="toCount" type="default" :disabled="!idList.length">查看标注统计</el-button>
     </div>
 
     <el-table
       :data="list"
+      ref="table"
       border
+      @selection-change="handleSelectionChange"
     >
+      <el-table-column
+        type="selection"
+        align="center"
+        width="55">
+      </el-table-column>
+
       <el-table-column
         prop="id"
         label="文件ID"
@@ -34,10 +43,11 @@
         prop="id"
         label="操作"
         align="center"
-        width="180"
+        width="280"
       >
         <template slot-scope="scope">
           <a :href="`/tag-examine/${scope.row.id}`" type="text" size="small">审核</a>
+          <a :href="`/tag-count?projectIds=${scope.row.id}`" class="export" type="text" size="small">统计</a>
           <a href="javascript: void(0);" class="export" @click="exportFile(scope.row.id)" type="text" size="small">导出</a>
         </template>
       </el-table-column>
@@ -73,6 +83,8 @@ export default {
       uploadUrl: `${baseUrl}/data/entry/file/upload`,
 
       loading: false,
+
+      idList: [],
     }
   },
 
@@ -142,6 +154,15 @@ export default {
         this.exportLoad = false;
       })
     },
+
+    // 多选
+    handleSelectionChange(val) {
+      this.idList = val.map(e => e.id);
+    },
+
+    toCount() {
+      this.$router.push(`/tag-count?projectIds=${this.idList.join()}`)
+    }
   }
 }
 </script>

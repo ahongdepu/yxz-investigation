@@ -61,12 +61,16 @@ export default {
   },
 
   created() {
-    console.log(this.$route);
+    console.log();
     this.menuMap = [{}, ...menu].reduce((map, route) => {
       map[route.name] = route.father || route.path;
       return map;
     });
-    console.log(this.menuMap);
+    console.log(1,this.menuMap);
+    const {name} = this.$route;
+    if (!(name in this.menuMap)) {
+      this.$router.push(this.isOperator ? '/tag-list' : '/tag-manage');
+    }
   },
 
   computed: {

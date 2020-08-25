@@ -27,6 +27,12 @@ export const menu = [
     father: '/tag-manage', // 自定义字段  表明父级
     component: () => import(/* webpackChunkName: "TagExamine" */ '../views/tag-examine'),
   },
+  {
+    path: '/tag-count',
+    name: 'TagCount',
+    father: '/tag-manage', // 自定义字段  表明父级
+    component: () => import(/* webpackChunkName: "TagCount" */ '../views/tag-count'),
+  },
 ];
 
 const routes = [

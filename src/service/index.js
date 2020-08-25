@@ -23,6 +23,7 @@ export const login = (data) => {
 // 获取数据文件列表
 export const fileList = (data) => ajax('/data/entry/datafile/list', data);
 
+
 // 获取文件待审核记录
 export const fileDetail = (id) => ajax(`/data/entry/get/${id}`);
 
@@ -38,4 +39,8 @@ export const batch = (data) => ajax('/data/entry/examine/batch', data, 'post');
 
 // 导出标注结果
 export const exportFile = (fileId) => ajax.downLoad(`/data/entry/export/${fileId}`);
+
+
+// 统计标注量
+export const commitCount = (data) => ajax('/admin/data-entry/commit/count', data, 'post');
 
