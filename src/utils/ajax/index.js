@@ -98,10 +98,13 @@ ajax.downLoad = (...param) => {
     responseType: 'blob',
   };
   return ajax(...param).catch((response) => {
+    console.log(11, response);
     if (response && response.data && !response.data.state && response.data.state !== 0) {
       const {data} = response;
       try {
-        const blob = tools.downLoad(data, '标注结果.xls');
+        const disposition = response.headers['content-disposition'];
+        const fileName = disposition.match(/filename=.*\.*$/)[0];
+        const blob = tools.downLoad(data, fileName ? fileName.replace('filename=', '') : '标注结果.xls');
         return Promise.resolve(blob);
       } catch(e) {
         return Promise.reject(e);
